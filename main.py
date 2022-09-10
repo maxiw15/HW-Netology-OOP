@@ -83,6 +83,32 @@ class Reviewer(Mentor):
         return res
 
 
+def average_rating_all_students(students_list, name_lesson):
+    total = 0
+    counter = 0
+    for student in students_list:
+        if name_lesson in student.grades:
+            total += sum(student.grades[name_lesson])
+            counter += len(student.grades[name_lesson])
+    if counter == 0:
+        return None
+    else:
+        return total / counter
+
+
+def average_rating_all_lectors(lectors_list, name_lesson):
+    total = 0
+    counter = 0
+    for lectors in lectors_list:
+        if name_lesson in lectors.courses_attached:
+            total += sum(lectors.courses_grade)
+            counter += len(lectors.courses_grade)
+    if counter == 0:
+        return None
+    else:
+        return total / counter
+
+
 Max = Student("Max", "Ivanov", "m")
 Olga = Lecturer("Olga", "Ivanova")
 Bupt = Reviewer("Bupt", "Ivanova")
@@ -96,10 +122,12 @@ Max.rate_hw(Olga, 10)
 Sergey = Student("Sergey", "Petrov", "m")
 Alina = Lecturer("Alina", "Petrova")
 Petra = Reviewer("Petra", "Petrova")
-Sergey.add_courses("rus")
-Alina.add_courses("rus")
-Petra.add_courses("rus")
-Petra.rate_hw(Sergey, "rus", 8)
-Petra.rate_hw(Sergey, "rus", 7)
-Sergey.rate_hw(Alina, 2)
-Sergey.rate_hw(Alina, 6)
+Sergey.add_courses("math")
+Alina.add_courses("math")
+Petra.add_courses("math")
+Petra.rate_hw(Sergey, "math", 5)
+Petra.rate_hw(Sergey, "math", 6)
+Sergey.rate_hw(Alina, 10)
+Sergey.rate_hw(Alina, 10)
+print(average_rating_all_students([Max, Sergey], "math"))
+print(average_rating_all_lectors([Olga, Alina], "math"))
