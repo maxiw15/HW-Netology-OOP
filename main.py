@@ -8,9 +8,13 @@ class Student:
         self.courses_end = []
 
     def __average_rating(self):
-        wtf1 = sum(list(self.grades.values())[0])  # Не понимаю откуда тут появляется вложенный список
-        wtf2 = len(list(self.grades.values())[0])
-        return wtf1 / wtf2
+        step_1 = self.grades.values()[0]
+        step_1 = list(step_1)
+        step_1 = sum(step_1)
+        step_2 = self.grades.values()[0]
+        step_2 = list(step_2)
+        step_2 = len(step_2)
+        return step_1 / step_2
 
     def __str__(self):
         res = f"Имя: {self.name}\n" \
